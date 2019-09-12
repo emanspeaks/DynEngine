@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15.3)
 
 ## define the project
 project(DynEngine
-        VERSION 0.0.1
+        VERSION 0.1.0.0
         DESCRIPTION "Dynamics Engine"
         HOMEPAGE_URL https://github.com/emanspeaks/DynEngine
         LANGUAGES CXX)
@@ -37,19 +37,34 @@ endif()
 ## Set the project default build type
 include(DefaultBuildType)
 
-## Hide the configuration types list
+## Hides stuff added by VSCode CMake Tools
 mark_as_advanced(CMAKE_CONFIGURATION_TYPES)
 mark_as_advanced(CMAKE_GNUtoMS)
+mark_as_advanced(CMAKE_C_COMPILER)
 
 ################################################################################
 ## Define project contents
 ################################################################################
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE CACHE BOOL "Generate compile_commands.json" FORCE)
+mark_as_advanced(CMAKE_EXPORT_COMPILE_COMMANDS)
+## VS Code bug workaround: see https://github.com/microsoft/vscode-cpptools/issues/1718#issuecomment-410515196
+set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES OFF CACHE BOOL "Disable use of @CMakeFiles syntax in compile_commands.json" FORCE)
+mark_as_advanced(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES)
+
+
+## Force Unicode always
+add_compile_definitions(_UNICODE UNICODE)
+
 add_library(dynenginelib STATIC)
-add_executable(dynengineexe)
+
+add_executable(dynengineexe WIN32)
 target_link_libraries(dynengineexe dynenginelib)
+set_target_properties(dynengineexe PROPERTIES COMPILE_DEFINITIONS "WIN32;_WINDOWS")
 
 ## Add the subproject subdirectories
+add_subdirectory(include/lib)
 add_subdirectory(src/lib)
+add_subdirectory(include/exe)
 add_subdirectory(src/exe)
 
 ## for VS, set the startup target (the one that starts in debugger by default)

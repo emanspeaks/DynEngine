@@ -1,0 +1,6 @@
+target_include_directories(dynengineexe PUBLIC .)
+target_sources(dynengineexe PUBLIC gui.h)
+if (WIN32)
+  target_sources(dynengineexe PRIVATE windows_gui.h)
+  target_sources(dynengineexe PRIVATE windows_strings.h)
+endif()
