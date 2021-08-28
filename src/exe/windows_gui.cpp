@@ -9,9 +9,9 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
   // Store instance handle in our global variable
   hInst = hInstance;
 
-  #ifndef MINGW
+  //#ifndef MINGW
   SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
-  #endif
+  //#endif
 
   // this is just for testing the WinErrorMsg function
   //if(!GetProcessId(NULL)) WinErrorMsg("GetProcessId");
