@@ -1,0 +1,5 @@
+#pragma once
+
+#define DynEngine_VERSION_MAJOR @DynEngine_VERSION_MAJOR@
+#define DynEngine_VERSION_MINOR @DynEngine_VERSION_MINOR@
+#define DynEngine_VERSION_PATCH @DynEngine_VERSION_PATCH@
